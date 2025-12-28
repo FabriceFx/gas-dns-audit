@@ -1,4 +1,4 @@
-# Vérificateur DNS Avancé pour Google Sheets
+# Vérificateur DNS avancé pour Google Sheets
 
 ![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-Google%20Apps%20Script-green)
@@ -11,21 +11,21 @@ Ce projet est un outil d'audit DNS automatisé intégré à Google Sheets. Il pe
 
 Il s'adresse aux administrateurs systèmes, aux équipes de délivrabilité email et aux développeurs souhaitant surveiller des configurations de domaines sans recourir à des outils externes coûteux.
 
-## Fonctionnalités Clés
+## Fonctionnalités clés
 
-* **Vérification Multi-Protocoles** : Analyse des enregistrements MX, A, SPF et DMARC.
-* **Interprétation Intelligente** :
+* **Vérification Multi-protocoles** : Analyse des enregistrements MX, A, SPF et DMARC.
+* **Interprétation intelligente** :
     * Identification automatique des fournisseurs de messagerie (Google Workspace, Office 365, etc.).
     * Lecture des politiques de sécurité (SPF `softfail`/`hardfail`, DMARC `p=none`/`quarantine`/`reject`).
-* **Architecture Robuste** :
+* **Architecture robuste** :
     * Utilisation du moteur V8 de Google Apps Script.
     * Gestion d'erreurs (Try/Catch) par domaine pour ne pas bloquer l'exécution globale.
     * Système "Anti-Cache" via paramètre aléatoire dans les requêtes API.
-* **Configuration Flexible** : Pilotage complet depuis une feuille de calcul dédiée (aucun changement de code nécessaire pour modifier les paramètres).
+* **Configuration flexible** : Pilotage complet depuis une feuille de calcul dédiée (aucun changement de code nécessaire pour modifier les paramètres).
 * **Journalisation** : Historique des exécutions (durée, nombre d'erreurs) dans un onglet "Journal".
-* **Rapports par Email** : (Optionnel) Envoi d'un résumé d'exécution automatique.
+* **Rapports par email** : (Optionnel) Envoi d'un résumé d'exécution automatique.
 
-## Prérequis et Structure du Google Sheet
+## Prérequis et structure du Google Sheet
 
 Pour que le script fonctionne, votre classeur Google Sheets doit contenir impérativement trois onglets.
 
@@ -44,7 +44,7 @@ Cet onglet pilote le script. Créez les valeurs suivantes dans les colonnes A (C
 | **Activer Rapport par Email** | `FAUX` | `VRAI` ou `FAUX`. |
 | **Email pour le rapport** | `admin@example.com` | L'adresse de destination du rapport. |
 
-### 2. Onglet de Données (ex: `Audit`)
+### 2. Onglet de données (ex: `Audit`)
 * Doit porter le nom défini dans la configuration.
 * Doit contenir une liste de noms de domaines (ex: `google.com`) dans la colonne configurée, à partir de la ligne 2.
 * La ligne 1 est réservée aux en-têtes (le script les générera automatiquement).
@@ -62,7 +62,7 @@ Cet onglet pilote le script. Créez les valeurs suivantes dans les colonnes A (C
 
 ## Utilisation
 
-### Mode Manuel
+### Mode manuel
 1.  Cliquez sur le menu **Outils DNS Avancés** dans la barre d'outils.
 2.  Sélectionnez **Lancer la vérification manuelle**.
 3.  Lors de la première exécution, Google vous demandera d'autoriser le script (accès à UrlFetchApp et au Spreadsheet).
@@ -75,8 +75,8 @@ Pour exécuter ce script périodiquement (ex: tous les matins) :
     * Source : "Déclenché par le temps".
     * Type : "Jour" ou "Heure".
 
-## Notes Techniques
+## Notes techniques
 
 * **API Rate Limits** : Le script utilise un délai de `200ms` (`DELAI_API_MS`) entre chaque appel pour respecter les quotas de l'API Google DNS publique.
-* **MailApp** : La fonction d'envoi d'email est présente dans le code. Assurez-vous de dé-commenter la ligne `MailApp.sendEmail` dans la fonction `envoyerRapportParEmail` si vous souhaitez activer l'envoi effectif.
+
 
